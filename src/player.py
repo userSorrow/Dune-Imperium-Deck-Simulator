@@ -27,6 +27,8 @@ class Player:
                 card = self.deck.pop()
                 drawn.append(card)
                 self.hand.append(card)
+        if len(drawn) == 0:
+            return ["NONE"]
         return drawn
     
     def discardCard(self, card_name):
@@ -39,6 +41,14 @@ class Player:
         
         print("DID NOT DISCARD CARD") # SHOULD THROW EXCEPTION
         return False
+    
+    def trash(self, card_name):
+        if card_name.lower() in (card.lower() for card in self.discard):
+            self.discard.remove(card_name)
+        elif card_name.lower() in (card.lower() for card in self.hand):
+            self.hand.remove(card_name)
+        else:
+            print("DID NOT TRASH CARD") # SHOULD THROW EXCEPTION
     
     def shuffle_discard_into_deck(self):
         random.shuffle(self.discard)
@@ -63,7 +73,7 @@ class Player:
     
     def __str__(self) -> str:
         peek_str = ""
-        if (self.isPaul):
+        if (self.isPaul and len(self.deck) > 0):
             peek_str = ", Top Card: " + self.peek()
         return f"""{self.leader}
 deck: {len(self.deck)} count{peek_str}

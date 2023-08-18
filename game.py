@@ -43,27 +43,25 @@ while playing:
         print(player)
         command_full = prompt_command().split()
         command = command_full[0].lower()
+        command_full.pop(0)
+        target_card = " ".join(command_full) or ""
         # unable to do match/case in vscode
         if command == "draw":
-            if len(command_full) == 1:
+            if len(command_full) == 0:
                 # Only 1 Card
                 drawn = player.draw()[0]
                 print("Drawn Card: " + drawn)
             else:
-                num_draws = int(command_full[1])
+                num_draws = int(command_full[0]) # popped first element
                 drawn = player.draw(num_draws)
                 print("Drawn Cards: " + ", ".join(drawn))
         elif command == "discard":
-            command_full.pop(0)
-            target_card = " ".join(command_full)
             player.discardCard(target_card)
+        elif command == "trash":
+            player.trash(target_card)
         elif command == "acquire":
-            command_full.pop(0)
-            target_card = " ".join(command_full)
             player.acquire(target_card)
         elif command == "place":
-            command_full.pop(0)
-            target_card = " ".join(command_full)
             player.place_from_discard_to_top(target_card)
         elif command == "pass":
             player_continues = False
