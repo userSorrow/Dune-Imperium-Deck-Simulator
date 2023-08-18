@@ -6,6 +6,9 @@ class Player:
         self.deck = Player.make_starting_deck() # [last card, ... third card, second card, top card]
         self.discard = []
         self.hand = []
+        self.resources = {"Spice": 0, 
+                          "Solaris": 0, 
+                          "Water": 0 }
         self.isPaul = False
         if (self.leader.split()[0].lower() == "paul"):
             self.isPaul = True
@@ -66,6 +69,14 @@ class Player:
     def acquire(self, card_name):
         self.discard.append(card_name)
         
+    def obtain_resources(self, resource_type):
+        if resource_type.capitalize() not in self.resources.keys():
+            print("Wrong type of resource") # you can put an exception error here
+        else:
+            amt = int(input("How much? "))
+            self.resources[resource_type.capitalize()] += amt  
+            
+        
     def make_starting_deck():
         starting_deck = ["Signet Ring", "Seek Allies", "Diplomacy", "Dagger", "Dagger", "Reconnaissance", "Dune, The Desert Planet", "Dune, The Desert Planet", "Convincing Argument", "Convincing Argument"]
         random.shuffle(starting_deck)
@@ -79,4 +90,5 @@ class Player:
 deck: {len(self.deck)} count{peek_str}
 discard: {self.discard}
 hand: {self.hand}
+resources: {[key + " : " + str(value) for key, value in self.resources.items()]}
         """

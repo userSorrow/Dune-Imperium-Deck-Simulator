@@ -63,6 +63,8 @@ while playing:
             player.acquire(target_card)
         elif command == "place":
             player.place_from_discard_to_top(target_card)
+        elif command == "obtain":
+            player.obtain_resources(target_card)
         elif command == "pass":
             player_continues = False
         print()

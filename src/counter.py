@@ -5,7 +5,6 @@ class Counter:
         self.solari_amt = 0
     
     def change_currency_amt(self, currencies:list, amt:list) -> None:
-        i = 0
         for i in range(len(currencies)):
             if currencies[i].lower() == "spice":
                 self.spice_amt += amt[i]
@@ -27,25 +26,5 @@ Water: {self.water_amt}
 
 ~~~~~~~~~~~~~~~~
 """
-        
-    
-
-exit = False
-print("""This is a Resource Counter for Dune the Board Game
-""")
-while not exit:
-    counter = Counter()
-    
-    currency_type = input("""Which currency would you like to change
-> Spice
-> Solari
-> Water
-Response: """).replace(" ", "").split("/")
-    
-    currency_amt = [int(i) for i in input("""\nHow much quantity would you like to change
-Response: """).replace(" ", "").split("/")]
-    
-    counter.change_currency_amt(currency_type, currency_amt)
-    print(counter.UI())
     
     
